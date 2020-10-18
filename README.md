@@ -1,3 +1,5 @@
+![Tests](https://github.com/monjohn/inform/workflows/Elixir%20CI/badge.svg)
+
 # Inform
 
 To start your Phoenix server:
