@@ -20,7 +20,7 @@ defmodule Inform.MixProject do
   def application do
     [
       mod: {Inform.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ex_twilio]
     ]
   end
 
@@ -45,7 +45,9 @@ defmodule Inform.MixProject do
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:ex_twilio, "~> 0.8.1"},
+      {:csv, "~> 2.4"}
     ]
   end
 
