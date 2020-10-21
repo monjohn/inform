@@ -46,7 +46,8 @@ defmodule Inform.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:ex_twilio, "~> 0.8.1"}
+      {:ex_twilio, "~> 0.8.1"},
+      {:csv, "~> 2.4"}
     ]
   end
 
