@@ -1,11 +1,23 @@
 defmodule TwilioService do
+  require Logger
+
+  @organization_number "16508259321"
+
   def send_trial_message do
-    {target_number, twilio_number_you_own, body} = {"+19193331749", "+16508259321", "Hello World"}
-    ExTwilio.Message.create(to: target_number, from: twilio_number_you_own, body: body)
+    {target_number, body} = {"+19193331749", "Hello World"}
+    ExTwilio.Message.create(to: target_number, from: @organization_number, body: body)
   end
 
   def all_messages do
     ExTwilio.Message.all()
+  end
+
+  def send_message(%{phone: to_number}, message) do
+    ExTwilio.Message.create(to: to_number, from: @organization_number, body: message)
+  end
+
+  def send_message(%{first_name: first_name, last_name: last_name}, message) do
+    Logger.error("No phone number for #{first_name} #{last_name} to send message: #{message}")
   end
 
   # ExTwilio.Message.find("SM67192f2112534784b89f450495f27f5d")
