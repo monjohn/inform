@@ -18,6 +18,7 @@ defmodule InformWeb.Router do
     pipe_through :browser
 
     live "/", SendLive, :index
+    live "/recipients", RecipientsLive, :index
   end
 
   # Other scopes may use custom stacks.

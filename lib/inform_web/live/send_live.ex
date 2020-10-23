@@ -1,5 +1,6 @@
 defmodule InformWeb.SendLive do
   use InformWeb, :live_view
+  import Inform.Recipients, only: [recipients: 1, regions: 0]
 
   import TwilioService, only: [send_message: 2]
 
@@ -41,30 +42,10 @@ defmodule InformWeb.SendLive do
     socket.assigns.recipients
     |> Enum.each(fn recipient -> send_message(recipient, socket.assigns.message) end)
 
-    {:noreply, assign(socket, page: 1)}
-  end
-
-  defp regions do
-    [:east, :west, :south, :triangle, :triad]
-  end
-
-  defp recipients(region) do
-    all = [
-      %{first_name: "Monte", last_name: "Johnston", region: "triangle", phone: "9193331749"},
-      %{first_name: "Bob", last_name: "Jones", region: "east"},
-      %{first_name: "Artimus", last_name: "Fowle", region: "east"},
-      %{first_name: "Oswald", last_name: "Jessup", region: "west"}
-    ]
-
-    case region do
-      nil ->
-        all
-
-      _region ->
-        Enum.filter(all, fn %{region: recip_region} ->
-          region == recip_region
-        end)
-    end
+    {:noreply,
+     push_redirect(socket,
+       to: Routes.live_path(socket, InformWeb.RecipientsLive)
+     )}
   end
 
   @impl true

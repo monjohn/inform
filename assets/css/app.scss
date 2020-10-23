@@ -96,3 +96,25 @@
 .grid > span {
   padding: 8px 4px;
 }
+
+.recipients {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.message {
+  border-radius: 5px;
+  border-width: thin;
+  border-style: solid;
+  padding: 10px;
+  margin: 10px 0;
+}
+.inbound {
+  border-color: #754fa2;
+  // color: #4575cf;
+}
+.outbound-reply,
+.outbound-api {
+  border-color: #f26d40;
+}

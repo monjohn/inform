@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="recipients">
+    <h3>Recipients</h3>
+    <%= for recipient <- @recipients do %>
+      <a href="#" phx-click="select" phx-value-id="<%= recipient.id %>">
+        <div>
+          <span><%= recipient.first_name %></span>
+          <span><%= recipient.last_name %></span>
+        </div>
+      </a>
+    <% end %>
+  </div>
+  <div class="messages">
+    <h3>Messages</h3>
+    <%= for message <- @messages do %>
+      <div class="message <%= message.direction  %>">
+        <div>
+          <span>Sent:</span>
+          <span><%= message.date_sent %></span>
+        </div>
+        <div>
+          <blockquote><%= message.body %></blockquote>
+        </div>
+        <%= if message.direction == "inbound" do %>
+          <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+            <span>Send to: <%= message.to %></span>
+            <span>Status: <%= message.status %></span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
