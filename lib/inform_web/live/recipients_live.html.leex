@@ -2,7 +2,7 @@
   <div class="recipients">
     <h3>Recipients</h3>
     <%= for recipient <- @recipients do %>
-      <a href="#" phx-click="select" phx-value-id="<%= recipient.id %>">
+      <a href="#" phx-click="select" phx-value-phone="<%= recipient.phone %>">
         <div>
           <span><%= recipient.first_name %></span>
           <span><%= recipient.last_name %></span>
@@ -16,7 +16,7 @@
       <div class="message <%= message.direction  %>">
         <div>
           <span>Sent:</span>
-          <span><%= message.date_sent %></span>
+          <span><%= format_date(message.date_sent) %></span>
         </div>
         <div>
           <blockquote><%= message.body %></blockquote>

@@ -18,6 +18,10 @@ defmodule TwilioService do
     messages
   end
 
+  def messages_for(%{phone: number}) do
+    ExTwilio.Message.all(to: number)
+  end
+
   def test_messages do
     [
       %ExTwilio.Message{

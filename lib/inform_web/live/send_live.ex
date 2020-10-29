@@ -38,13 +38,13 @@ defmodule InformWeb.SendLive do
     {:noreply, assign(socket, page: String.to_integer(page))}
   end
 
-  def handle_event("send", _params, socket) do
+  def handle_event("send", %{"message" => message}, socket) do
     socket.assigns.recipients
-    |> Enum.each(fn recipient -> send_message(recipient, socket.assigns.message) end)
+    |> Enum.each(fn recipient -> send_message(recipient, message) |> IO.inspect() end)
 
     {:noreply,
      push_redirect(socket,
-       to: Routes.live_path(socket, InformWeb.RecipientsLive)
+       to: Routes.recipients_path(socket, :index)
      )}
   end
 
@@ -87,7 +87,7 @@ defmodule InformWeb.SendLive do
       <textarea name="message" autofocus /></textarea>
 
       <button phx-click="back" phx-value-page="1" type="button" >Back</button>
-      <button type="submit" phx-disable-with="Searching...">Next</button>
+      <button type="submit" phx-disable-with="Searching...">Send</button>
       </form>
     </section>
     """

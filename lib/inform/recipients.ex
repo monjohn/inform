@@ -8,9 +8,9 @@ defmodule Inform.Recipients do
         region: "triangle",
         phone: "9193331749"
       },
-      %{id: 2, first_name: "Bob", last_name: "Jones", region: "east"},
-      %{id: 3, first_name: "Artimus", last_name: "Fowle", region: "east"},
-      %{id: 4, first_name: "Oswald", last_name: "Jessup", region: "west"},
+      %{id: 2, first_name: "Bob", last_name: "Jones", region: "east", phone: "number"},
+      %{id: 3, first_name: "Artimus", last_name: "Fowle", region: "east", phone: "number"},
+      %{id: 4, first_name: "Oswald", last_name: "Jessup", region: "west", phone: "number"},
       %{
         id: 5,
         first_name: "Kari",
