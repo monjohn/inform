@@ -48,7 +48,8 @@ defmodule Inform.MixProject do
       {:phoenix_live_dashboard, "~> 0.3 or ~> 0.2.9"},
       {:plug_cowboy, "~> 2.0"},
       {:telemetry_metrics, "~> 0.4"},
-      {:telemetry_poller, "~> 0.4"}
+      {:telemetry_poller, "~> 0.4"},
+      {:torch, "~> 3.4"}
     ]
   end
 
