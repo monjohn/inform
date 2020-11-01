@@ -15,4 +15,4 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 `mix torch.gen.html Accounts User users first_name:string last_name:string`
 
-`mix torch.gen.html Recipients Recipients recipients first_name:string last_name:string`
+`mix torch.gen.html Accounts User users first_name:string last_name:string phone:string`

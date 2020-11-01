@@ -1,7 +1,6 @@
 defmodule InformWeb.RecipientsLive do
   use InformWeb, :live_view
-
-  import Inform.Recipients, only: [recipients: 1]
+  alias Inform.Accounts
 
   @impl true
   def mount(_params, _session, socket) do
@@ -9,7 +8,7 @@ defmodule InformWeb.RecipientsLive do
 
     {:ok,
      assign(socket,
-       recipients: recipients(nil),
+       recipients: Accounts.list_users(),
        current: nil,
        messages: []
      )}

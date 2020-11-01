@@ -26,6 +26,14 @@ defmodule InformWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
+  plug(
+    Plug.Static,
+    at: "/torch",
+    from: {:torch, "priv/static"},
+    gzip: true,
+    cache_control_for_etags: "public, max-age=86400"
+  )
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
@@ -51,12 +59,4 @@ defmodule InformWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug InformWeb.Router
-
-  plug(
-    Plug.Static,
-    at: "/torch",
-    from: {:torch, "priv/static"},
-    gzip: true,
-    cache_control_for_etags: "public, max-age=86400"
-  )
 end

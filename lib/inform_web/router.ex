@@ -19,6 +19,7 @@ defmodule InformWeb.Router do
 
     live "/", SendLive, :index
     live "/recipients", RecipientsLive, :index
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.

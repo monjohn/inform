@@ -1,6 +1,5 @@
 defmodule InformWeb.SendLive do
   use InformWeb, :live_view
-  import Inform.Recipients, only: [recipients: 1, regions: 0]
 
   import TwilioService, only: [send_message: 2]
 
@@ -8,7 +7,15 @@ defmodule InformWeb.SendLive do
 
   def mount(_params, _session, socket) do
     IO.puts("Mounting")
-    {:ok, assign(socket, query: "", page: 1, recipients: recipients(nil), regions: regions())}
+
+    {:ok,
+     assign(socket,
+       query: "",
+       page: 1,
+       recipients: recipients("all"),
+       regions: [:all | Ecto.Enum.values(Inform.Accounts.User, :region)],
+       selected_region: :all
+     )}
   end
 
   @impl true
@@ -48,6 +55,21 @@ defmodule InformWeb.SendLive do
      )}
   end
 
+  def recipients(region) do
+    all = Inform.Accounts.list_users()
+    region = String.to_atom(region)
+
+    case region do
+      :all ->
+        all
+
+      _region ->
+        Enum.filter(all, fn %{region: recip_region} ->
+          region == recip_region
+        end)
+    end
+  end
+
   @impl true
   def render(assigns) do
     IO.puts("rendering")
@@ -59,9 +81,8 @@ defmodule InformWeb.SendLive do
         <form phx-change="filter" >
           <label for="region">Region</label>
           <select name="region" id="region-select">
-            <option value="">--Please choose an region--</option>
             <%= for region <- @regions do %>
-              <option value="<%= region %>"><%= region %></option>
+              <option value="<%= region %>" <%= region === @selected_region && "selected " %>><%= region %></option>
             <% end %>
           </select>
           <button  type="button" phx-click="next" phx-value-page="2" >Next</button>
