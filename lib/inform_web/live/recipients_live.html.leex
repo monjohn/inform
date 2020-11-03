@@ -4,6 +4,9 @@
     <form phx-change="filter" >
       <input type="text" name="namesearch" autocomplete="off" />
     </form>
+    <a href="#" phx-click="select" phx-value-phone="all">
+      <p>Lastest sent and received</p>
+    </a>
     <%= for recipient <- @recipients do %>
       <a href="#" phx-click="select" phx-value-phone="<%= recipient.phone %>">
         <div>

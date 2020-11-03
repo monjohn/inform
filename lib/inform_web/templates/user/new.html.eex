@@ -3,7 +3,6 @@
     <%= link "Cancel", to: Routes.user_path(@conn, :index), class: "torch-button" %>
   </div>
 </section>
-
 <section id="torch-header-and-content">
   <div class="torch-container">
     <div class="header">

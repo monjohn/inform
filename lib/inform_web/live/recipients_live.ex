@@ -27,7 +27,12 @@ defmodule InformWeb.RecipientsLive do
 
   @impl true
   def handle_event("select", %{"phone" => phone}, socket) do
-    messages = TwilioService.messages_for(%{phone: phone})
+    messages =
+      case phone do
+        "all" -> TwilioService.all_messages()
+        _ -> TwilioService.messages_for(%{phone: phone})
+      end
+
     {:noreply, assign(socket, messages: messages)}
   end
 

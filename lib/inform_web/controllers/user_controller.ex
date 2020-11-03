@@ -35,7 +35,10 @@ defmodule InformWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html",
+          changeset: changeset,
+          regions: Ecto.Enum.values(User, :region)
+        )
     end
   end
 
@@ -65,7 +68,11 @@ defmodule InformWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        render(conn, "edit.html",
+          user: user,
+          changeset: changeset,
+          regions: Ecto.Enum.values(User, :region)
+        )
     end
   end
 
