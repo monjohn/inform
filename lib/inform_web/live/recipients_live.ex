@@ -26,11 +26,13 @@ defmodule InformWeb.RecipientsLive do
   end
 
   @impl true
-
-  @spec handle_event(<<_::48>>, map, Phoenix.LiveView.Socket.t()) :: {:noreply, any}
   def handle_event("select", %{"phone" => phone}, socket) do
-    # id = String.to_integer(id)
     messages = TwilioService.messages_for(%{phone: phone})
     {:noreply, assign(socket, messages: messages)}
+  end
+
+  def handle_event("filter", %{"namesearch" => name}, socket) do
+    recipients = Inform.Accounts.users_like(name)
+    {:noreply, assign(socket, recipients: recipients)}
   end
 end

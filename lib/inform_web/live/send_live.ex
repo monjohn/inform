@@ -12,7 +12,7 @@ defmodule InformWeb.SendLive do
      assign(socket,
        query: "",
        page: 1,
-       recipients: recipients("all"),
+       recipients: Inform.Accounts.list_users(),
        regions: [:all | Ecto.Enum.values(Inform.Accounts.User, :region)],
        selected_region: :all
      )}
@@ -20,7 +20,8 @@ defmodule InformWeb.SendLive do
 
   @impl true
   def handle_event("filter", %{"region" => region}, socket) do
-    {:noreply, assign(socket, recipients: recipients(region))}
+    recipients = Inform.Accounts.list_users(region: region)
+    {:noreply, assign(socket, recipients: recipients)}
   end
 
   @impl true
@@ -55,21 +56,6 @@ defmodule InformWeb.SendLive do
      )}
   end
 
-  def recipients(region) do
-    all = Inform.Accounts.list_users()
-    region = String.to_atom(region)
-
-    case region do
-      :all ->
-        all
-
-      _region ->
-        Enum.filter(all, fn %{region: recip_region} ->
-          region == recip_region
-        end)
-    end
-  end
-
   @impl true
   def render(assigns) do
     IO.puts("rendering")
@@ -90,12 +76,12 @@ defmodule InformWeb.SendLive do
       </section>
       <section class="row">
         <div class="grid">
-          <span class="table-header">First Name</span>
           <span class="table-header">Last Name</span>
+          <span class="table-header">First Name</span>
           <span class="table-header">Region</span>
           <%= for %{first_name: first_name, last_name: last_name, region: region} <- @recipients do %>
-            <span ><%= first_name %></span>
             <span ><%= last_name %></span>
+            <span ><%= first_name %></span>
             <span ><%= region %></span>
           <% end %>
         </div>
