@@ -17,7 +17,9 @@ defmodule InformWeb.Router do
   scope "/", InformWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", SendLive, :index
+    live "/recipients", RecipientsLive, :index
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.
